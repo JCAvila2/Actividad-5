@@ -6,6 +6,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Button;
@@ -37,79 +38,68 @@ public class MainActivity extends AppCompatActivity {
         // Listeners de botones de numeros (1, 2, 3, 4, 5, 6, 7, 8, 9, 0, .)
         boton1 = findViewById(id.button1);
         boton1.setOnClickListener(new View.OnClickListener() {
-           public void onClick(View view) {
-                Log.i("BOTON", "1");
-               // falta metodo para actualizar la pantalla
-           }
+            public void onClick(View view) {
+                actualizarPantalla("1");
+            }
         });
         boton2 = findViewById(id.button2);
         boton2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Log.i("BOTON", "2");
-                // falta metodo para actualizar la pantalla
+                actualizarPantalla("2");
             }
         });
         boton3 = findViewById(id.button3);
         boton3.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Log.i("BOTON", "3");
-                // falta metodo para actualizar la pantalla
+                actualizarPantalla("3");
             }
         });
         boton4 = findViewById(id.button4);
         boton4.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Log.i("BOTON", "4");
-                // falta metodo para actualizar la pantalla
+                actualizarPantalla("4");
             }
         });
         boton5 = findViewById(id.button5);
         boton5.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Log.i("BOTON", "5");
-                // falta metodo para actualizar la pantalla
+                actualizarPantalla("5");
             }
         });
         boton6 = findViewById(id.button6);
         boton6.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Log.i("BOTON", "6");
-                // falta metodo para actualizar la pantalla
+                actualizarPantalla("6");
             }
         });
         boton7 = findViewById(id.button7);
         boton7.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Log.i("BOTON", "7");
-                // falta metodo para actualizar la pantalla
+                actualizarPantalla("7");
             }
         });
         boton8 = findViewById(id.button8);
         boton8.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Log.i("BOTON", "8");
-                // falta metodo para actualizar la pantalla
+                actualizarPantalla("8");
             }
         });
         boton9 = findViewById(id.button9);
         boton9.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Log.i("BOTON", "9");
-                // falta metodo para actualizar la pantalla
+                actualizarPantalla("9");
             }
         });
         boton0 = findViewById(id.button0);
         boton0.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Log.i("BOTON", "0");
-                // falta metodo para actualizar la pantalla
+                actualizarPantalla("0");
             }
         });
         botonPunto = findViewById(id.button_punto);
         botonPunto.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Log.i("BOTON", ".");
-                // falta metodo para actualizar la pantalla
+                actualizarPantalla(".");
             }
         });
 
@@ -118,29 +108,25 @@ public class MainActivity extends AppCompatActivity {
         botonSuma = findViewById(id.buttonSum);
         botonSuma.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Log.i("BOTON", ".");
-                // Espacio para metodo de actualizar la pantalla
+                actualizarPantalla("+");
             }
         });
         botonResta = findViewById(id.buttonRest);
         botonResta.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Log.i("BOTON", ".");
-                // Espacio para metodo de actualizar la pantalla
+                actualizarPantalla("-");
             }
         });
         botonMultiplicacion = findViewById(id.buttonMult);
         botonMultiplicacion.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Log.i("BOTON", ".");
-                // Espacio para metodo de actualizar la pantalla
+                actualizarPantalla("*");
             }
         });
         botonDivision = findViewById(id.buttonDiv);
         botonDivision.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Log.i("BOTON", ".");
-                // Espacio para metodo de actualizar la pantalla
+                actualizarPantalla("/");
             }
         });
 
@@ -184,13 +170,14 @@ public class MainActivity extends AppCompatActivity {
                 valor = (p1 + "" + p2);
                 valorPantallaUsuario = valor;
                 pantalla.setText(valorPantallaUsuario);
+                Log.i("BOTON", "+/-");
             }
         });
+
         botonElevar = findViewById(id.buttonElevar);
         botonElevar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Log.i("BOTON", ".");
-                // Espacio para metodo de actualizar la pantalla
+                actualizarPantalla("^");
             }
         });
         //Aqui ira el boton de borrar
@@ -200,4 +187,45 @@ public class MainActivity extends AppCompatActivity {
         
 
     }
+
+    public void actualizarPantalla(String entrada) {
+        pantalla.setTextColor(Color.BLACK);
+        Log.i("BOTON", entrada);
+        valor += entrada;
+        switch (entrada) {
+            case "+":
+                valorPantallaUsuario += "+";
+                limpiar = false;
+                break;
+            case "-":
+                valorPantallaUsuario += "-";
+                limpiar = false;
+                break;
+            case "/":
+                valorPantallaUsuario += "÷";
+                limpiar = false;
+                break;
+            case "*":
+                valorPantallaUsuario += "×";
+                limpiar = false;
+                break;
+            case "":
+                valorPantallaUsuario = "";
+                limpiar = false;
+                break;
+            case "^":
+                valorPantallaUsuario += "^";
+                limpiar = false;
+                break;
+            default:
+                valorPantallaUsuario += entrada;
+        }
+        if (limpiar) {
+            valor = entrada;
+            valorPantallaUsuario = valor;
+            limpiar = false;
+        }
+        pantalla.setText(valorPantallaUsuario);
+    }
+    
 }
