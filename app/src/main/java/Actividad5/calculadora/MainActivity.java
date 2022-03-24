@@ -104,7 +104,13 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // Listener botones de operaciones (C, +, -, *, /, +/-, ^, ←)
-        //Aqui ira el boton clear
+        botonLimpiar = findViewById(id.buttonC);
+        botonLimpiar.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                valor = "";
+                actualizarPantalla("");
+            }
+        });
         botonSuma = findViewById(id.buttonSum);
         botonSuma.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -180,14 +186,47 @@ public class MainActivity extends AppCompatActivity {
                 actualizarPantalla("^");
             }
         });
-        //Aqui ira el boton de borrar
+        botonBorrar = findViewById(id.buttonBorrar);
+        botonBorrar.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                String valorBorrado = "";
+                for (int i = 0; i < valor.length() - 1; i++) {
+                    valorBorrado += valor.charAt(i);
+                }
+                valor = "";
+                valorPantallaUsuario = "";
+                actualizarPantalla(valorBorrado);
+            }
+        });
 
         // Listener boton boton de resultado (=)
-        //Aqui
-        
-
+        botonResultado = findViewById(id.buttonResultado);
+        botonResultado.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                try {
+                    String respuesta = evaluar(valor) + "";
+                    valor = "";
+                    valorPantallaUsuario = "";
+                    actualizarPantalla(respuesta);
+                    pantalla.setTextColor(getResources().getColor(R.color.validOperation));
+                    limpiar = true;
+                    Log.i("Respuesta", valor);
+                } catch (Exception e) {
+                    AlertDialog alerta = new AlertDialog.Builder(MainActivity.this).create();
+                    alerta.setTitle("Error");
+                    alerta.setMessage("Operación Inválida");
+                    alerta.setButton(alerta.BUTTON_NEUTRAL, "Ok", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                    alerta.show();
+                }
+            }
+        });
     }
 
+    // Funcion para actualizar el valor que se muestra al usuario
     public void actualizarPantalla(String entrada) {
         pantalla.setTextColor(Color.BLACK);
         Log.i("BOTON", entrada);
@@ -227,5 +266,78 @@ public class MainActivity extends AppCompatActivity {
         }
         pantalla.setText(valorPantallaUsuario);
     }
-    
+
+    // Funcion para evaluar el valor almacenado, recibe un string y si tiene logica matematica retorna un double con el resultado.
+    public static double evaluar(final String str) {
+        return new Object() {
+            int pos = -1, ch;
+            void nextChar() {
+                ch = (++pos < str.length()) ? str.charAt(pos) : -1;
+            }
+            boolean eat(int charToEat) {
+                while (ch == ' ') {
+                    nextChar();
+                }
+                if (ch == charToEat) {
+                    nextChar();
+                    return true;
+                }
+                return false;
+            }
+            double parse() {
+                nextChar();
+                double x = parseExpression();
+                if (pos < str.length()) {
+                    throw new RuntimeException((char)ch+"");
+                }
+                return x;
+            }
+            double parseExpression() {
+                double x = parseTerm();
+                for (;;) {
+                    if (eat('+')) { // suma
+                        x += parseTerm();
+                    }
+                    else if (eat('-')) { // resta
+                        x -= parseTerm();
+                    }
+                    else return x;
+                }
+            }
+            double parseTerm() {
+                double x = parseFactor();
+                for (;;) {
+                    if (eat('*')) { //multiplicacion
+                        x *= parseFactor();
+                    }
+                    else if (eat('/')) { // division
+                        x /= parseFactor();
+                    }
+                    else return x;
+                }
+            }
+            double parseFactor() {
+                if (eat('+')) { // mas
+                    return +parseFactor();
+                }
+                if (eat('-')) { // menos
+                    return -parseFactor();
+                }
+                double x;
+                int startPos = this.pos;
+                if ((ch >= '0' && ch <= '9') || ch == '.') { // numeros
+                    while ((ch >= '0' && ch <= '9') || ch == '.') {
+                        nextChar();
+                    }
+                    x = Double.parseDouble(str.substring(startPos, this.pos));
+                } else {
+                    throw new RuntimeException((char) ch + "");
+                }
+                if (eat('^')) { // exponente
+                    x = Math.pow(x, parseFactor());
+                }
+                return x;
+            }
+        }.parse();
+    }
 }
