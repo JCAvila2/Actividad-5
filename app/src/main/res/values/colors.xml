@@ -10,4 +10,8 @@
 
     <color name="pantalla">#767676</color>
     <color name="numerosColor">#0C5DFF</color>
+    <color name="colorOperadores1">#FF9800</color>
+    <color name="colorOperadores2">#3041A5</color>
+    <color name = "clearColor">#FF0000</color>
+    <color name = "botonigual">#8BC34A</color>
 </resources>

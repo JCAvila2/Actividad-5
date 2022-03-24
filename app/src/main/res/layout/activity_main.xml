@@ -147,6 +147,109 @@
             app:layout_column="1"
             app:layout_row="4" />
 
+        <Button
+            android:id="@+id/button_punto"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_margin="@dimen/default_gap"
+            android:backgroundTint="@color/colorOperadores2"
+            android:text="."
+            android:textColor="#ECEFF1"
+            app:layout_column="0"
+            app:layout_row="4" />
+
+        <Button
+            android:id="@+id/buttonCambiarSigno"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_margin="@dimen/default_gap"
+            android:backgroundTint="@color/colorOperadores2"
+            android:text="+/-"
+            app:layout_column="0"
+            app:layout_row="0"
+            tools:ignore="HardcodedText" />
+
+        <Button
+            android:id="@+id/buttonElevar"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_margin="@dimen/default_gap"
+            android:backgroundTint="@color/colorOperadores2"
+            android:text="^"
+            app:layout_column="1"
+            app:layout_row="0" />
+
+        <Button
+            android:id="@+id/buttonC"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_margin="@dimen/default_gap"
+            android:backgroundTint="@color/clearColor"
+            android:text="C"
+            app:layout_column="2"
+            app:layout_row="0" />
+
+        <Button
+            android:id="@+id/buttonDiv"
+            android:layout_width="100dp"
+            android:layout_height="70dp"
+            android:layout_margin="@dimen/default_gap"
+            android:backgroundTint="@color/colorOperadores1"
+            android:text="÷"
+            app:layout_column="4"
+            app:layout_row="0" />
+
+        <Button
+            android:id="@+id/buttonMult"
+            android:layout_width="100dp"
+            android:layout_height="70dp"
+            android:layout_margin="@dimen/default_gap"
+            android:backgroundTint="@color/colorOperadores1"
+            android:text="×"
+            app:layout_column="4"
+            app:layout_row="1" />
+
+        <Button
+            android:id="@+id/buttonRest"
+            android:layout_width="100dp"
+            android:layout_height="70dp"
+            android:layout_margin="@dimen/default_gap"
+            android:backgroundTint="@color/colorOperadores1"
+            android:text="-"
+            app:layout_column="4"
+            app:layout_row="2" />
+
+        <Button
+            android:id="@+id/buttonSum"
+            android:layout_width="100dp"
+            android:layout_height="70dp"
+            android:layout_margin="@dimen/default_gap"
+            android:backgroundTint="@color/colorOperadores1"
+            android:text="+"
+            app:layout_column="4"
+            app:layout_row="3" />
+
+        <Button
+            android:id="@+id/buttonResultado"
+            android:layout_width="100dp"
+            android:layout_height="70dp"
+            android:layout_margin="@dimen/default_gap"
+            android:backgroundTint="@color/botonigual"
+            android:text="="
+            app:layout_column="4"
+            app:layout_row="4" />
+
+
+        <Button
+            android:id="@+id/buttonBorrar"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_margin="@dimen/default_gap"
+            android:text="←"
+            android:backgroundTint="@color/colorOperadores2"
+            app:layout_column="2"
+            app:layout_row="4" />
+
 
     </androidx.gridlayout.widget.GridLayout>
 
