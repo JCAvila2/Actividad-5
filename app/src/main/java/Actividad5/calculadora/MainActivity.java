@@ -3,7 +3,6 @@ package Actividad5.calculadora;
 import static Actividad5.calculadora.R.*;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
@@ -15,20 +14,24 @@ import android.util.Log;
 
 public class MainActivity extends AppCompatActivity {
 
-    // Variables
+    // Declaracion de Variables
     ConstraintLayout layout;
     TextView pantalla;
     String valor = "", valorPantallaUsuario = "";
     boolean limpiar;
 
-    // Variables de botones
+
+    // Declaracion de Variables de botones
     Button boton1, boton2, boton3, boton4, boton5, boton6, boton7, boton8, boton9, boton0, botonPunto;
     Button botonSuma, botonResta, botonMultiplicacion, botonDivision, botonLimpiar, botonCambiarSigno, botonElevar, botonBorrar, botonResultado;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getSupportActionBar().hide();
+
 
         // Iniciacion de variables
         layout = findViewById(id.layout_main);
@@ -103,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
         // Listener botones de operaciones (C, +, -, *, /, +/-, ^, ←)
         botonLimpiar = findViewById(id.buttonC);
         botonLimpiar.setOnClickListener(new View.OnClickListener() {
@@ -135,7 +139,6 @@ public class MainActivity extends AppCompatActivity {
                 actualizarPantalla("/");
             }
         });
-
         botonCambiarSigno = findViewById(id.buttonCambiarSigno);
         botonCambiarSigno.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -179,7 +182,6 @@ public class MainActivity extends AppCompatActivity {
                 Log.i("BOTON", "+/-");
             }
         });
-
         botonElevar = findViewById(id.buttonElevar);
         botonElevar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -226,7 +228,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    // Funcion para actualizar el valor que se muestra al usuario
+    // Funcion para actualizar el valor que se muestra al usuario por la pantalla
     public void actualizarPantalla(String entrada) {
         pantalla.setTextColor(Color.BLACK);
         Log.i("BOTON", entrada);
