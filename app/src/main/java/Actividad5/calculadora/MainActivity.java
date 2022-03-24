@@ -3,6 +3,9 @@ package Actividad5.calculadora;
 import static Actividad5.calculadora.R.*;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Button;
@@ -19,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
     // Variables de botones
     Button boton1, boton2, boton3, boton4, boton5, boton6, boton7, boton8, boton9, boton0, botonPunto;
-
+    Button botonSuma, botonResta, botonMultiplicacion, botonDivision, botonLimpiar, botonCambiarSigno, botonElevar, botonBorrar, botonResultado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,13 +113,91 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // Listener botones de operaciones (C, +, -, *, /, +/-, ^, ←)
+        //Aqui ira el boton clear
+        botonSuma = findViewById(id.buttonSum);
+        botonSuma.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Log.i("BOTON", ".");
+                // Espacio para metodo de actualizar la pantalla
+            }
+        });
+        botonResta = findViewById(id.buttonRest);
+        botonResta.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Log.i("BOTON", ".");
+                // Espacio para metodo de actualizar la pantalla
+            }
+        });
+        botonMultiplicacion = findViewById(id.buttonMult);
+        botonMultiplicacion.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Log.i("BOTON", ".");
+                // Espacio para metodo de actualizar la pantalla
+            }
+        });
+        botonDivision = findViewById(id.buttonDiv);
+        botonDivision.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Log.i("BOTON", ".");
+                // Espacio para metodo de actualizar la pantalla
+            }
+        });
 
+        botonCambiarSigno = findViewById(id.buttonCambiarSigno);
+        botonCambiarSigno.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                String p1Inversed= "";
+                String p1 = "";
+                String p2 = "";
+                String valueToInvert = "";
+                String signToAdd = "";
+                boolean secondPart = false;
+                for (int i = valor.length(); i >= 1; i--) {
+                    if (!secondPart) {
+                        if (((valor.charAt(i-1) + "").equals("+")) || ((valor.charAt(i-1) + "").equals("-")) || ((valor.charAt(i-1) + "").equals("*")) || ((valor.charAt(i-1) + "").equals("/"))) {
+                            p1Inversed += ( valor.charAt(i-1) + "");
+                            if (((valor.charAt(i-1) + "").equals("-"))) {
+                                signToAdd = "+";
+                            } else if (((valor.charAt(i-1) + "").equals("+"))) {
+                                signToAdd = "-";
+                            }
+                            secondPart = true;
+                        } else {
+                            valueToInvert += valor.charAt(i-1);
+                        }
+                    } else {
+                        p1Inversed += ( valor.charAt(i-1) + "");
+                    }
+                }
+                if (signToAdd.equals("+")) {
+                    p2 += "+";
+                } else {
+                    p2 += "-";
+                }
+                for (int j = p1Inversed.length() ; j >= 1; j--) { //invert 1 part
+                    p1 += (p1Inversed.charAt(j-1) + "");
+                }
+                for (int i = valueToInvert.length(); i >= 1; i--) { // invert 2 part
+                    p2 += (valueToInvert.charAt(i-1) + "");
+                }
+                valor = (p1 + "" + p2);
+                valorPantallaUsuario = valor;
+                pantalla.setText(valorPantallaUsuario);
+            }
+        });
+        botonElevar = findViewById(id.buttonElevar);
+        botonElevar.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Log.i("BOTON", ".");
+                // Espacio para metodo de actualizar la pantalla
+            }
+        });
+        //Aqui ira el boton de borrar
 
-
-
-
-
-
+        // Listener boton boton de resultado (=)
+        //Aqui
+        
 
     }
 }
